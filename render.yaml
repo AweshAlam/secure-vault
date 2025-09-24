@@ -1,0 +1,14 @@
+# render.yaml
+services:
+  - type: web
+    name: secure-vault # Or whatever you named your service on Render
+    env: node
+    plan: free
+    # This command installs system libraries needed for the 'canvas' package
+    preBuildCommand: "apt-get update && apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev"
+    buildCommand: "npm install"
+    # This command points to the correct location of your server file
+    startCommand: "node server.js"
+    envVars:
+      - key: NODE_VERSION
+        value: 20
