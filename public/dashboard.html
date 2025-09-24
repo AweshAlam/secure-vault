@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Secure Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom animations for extra flair */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+        /* Custom gradient background */
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        /* Note card hover effect */
+        .note-card { transition: all 0.3s ease; transform: translateY(0); }
+        .note-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.2);
+        }
+    </style>
+</head>
+<body class="gradient-bg text-white min-h-screen">
+    <header class="bg-white/10 backdrop-blur-md border-b border-white/20 shadow-lg sticky top-0 z-10">
+        <nav class="container mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </div>
+                <h1 class="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent">
+                    Secure Dashboard
+                </h1>
+            </div>
+            <div class="flex items-center space-x-4 w-full sm:w-auto justify-center sm:justify-end">
+                <span id="welcomeMessage" class="text-sm sm:text-base font-medium text-gray-300 hidden sm:inline">Welcome, User</span>
+                <button id="logoutButton" class="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 sm:px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md">
+                    <span class="flex items-center space-x-2">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        <span class="hidden sm:inline">Logout</span>
+                    </span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-6 sm:py-8 fade-in-up">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div class="lg:col-span-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-6 shadow-xl">
+                <div class="text-center mb-4 sm:mb-6">
+                    <h2 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent mb-2">Add New Note</h2>
+                    <div class="w-10 h-10 mx-auto bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    </div>
+                </div>
+                <form id="dataForm" class="space-y-4">
+                    <div class="space-y-2">
+                        <label for="title" class="block text-sm font-semibold text-gray-300">Note Title</label>
+                        <input type="text" id="title" placeholder="Enter note title" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-300">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="content" class="block text-sm font-semibold text-gray-300">Content</label>
+                        <textarea id="content" placeholder="Your secure content..." rows="4" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <span class="flex items-center justify-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Save Secure Note</span>
+                        </span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="lg:col-span-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-6 shadow-xl">
+                <div class="text-center mb-4 sm:mb-6">
+                    <h2 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent mb-2">Your Saved Notes</h2>
+                    <div class="w-10 h-10 mx-auto bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                </div>
+                <div id="dataContainer" class="space-y-4 max-h-96 overflow-y-auto">
+                    <div id="loadingMessage" class="text-center text-gray-400 py-8 flex items-center justify-center">
+                        <div class="text-lg">Loading your secure notes...</div>
+                        <div class="w-6 h-6 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin ml-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center hidden z-20">
+        <div class="bg-gray-800 border border-white/20 rounded-2xl shadow-xl p-6 w-full max-w-lg mx-4">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-400">Edit Note</h2>
+            <form id="editForm" class="space-y-4">
+                <input type="hidden" id="editNoteId">
+                <div>
+                    <label for="editTitle" class="block text-sm font-semibold text-gray-300">Title</label>
+                    <input type="text" id="editTitle" required class="w-full mt-1 px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                </div>
+                <div>
+                    <label for="editContent" class="block text-sm font-semibold text-gray-300">Content</label>
+                    <textarea id="editContent" rows="5" required class="w-full mt-1 px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 resize-none"></textarea>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="cancelEdit" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-xl">Cancel</button>
+                    <button type="submit" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-bold py-2 px-6 rounded-xl">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
